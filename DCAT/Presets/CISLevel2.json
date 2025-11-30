@@ -1,0 +1,20 @@
+{
+  "Name": "CISLevel2",
+  "Description": "DCAT CIS Level 2-style Defender baseline (v0.1)",
+  "Rules": [
+    { "Key": "RealTimeProtectionEnabled", "Expected": true,  "Weight": 20 },
+    { "Key": "DisableRealtimeMonitoring", "Expected": false, "Weight": 10 },
+    { "Key": "PUAProtection",             "Expected": 1,     "Weight": 10 },
+    { "Key": "MAPSReporting",             "Expected": 2,     "Weight": 10 },
+    { "Key": "SubmitSamplesConsent",      "Expected": 1,     "Weight": 10 },
+    { "Key": "CloudBlockLevel",           "Expected": 4,     "Weight": 20 },
+    { "Key": "EnableNetworkProtection",   "Expected": 1,     "Weight": 20 }
+  ],
+  "MpPreferences": {
+    "PUAProtection": 1,
+    "MAPSReporting": 2,
+    "SubmitSamplesConsent": 1,
+    "CloudBlockLevel": 4,
+    "EnableNetworkProtection": 1
+  }
+}
