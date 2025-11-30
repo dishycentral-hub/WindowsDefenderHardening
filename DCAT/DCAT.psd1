@@ -9,10 +9,12 @@
     PowerShellVersion = '5.1'
 
     FunctionsToExport = @(
-        'Set-DCATHardening',
-        'Get-DCATScore',
-        'Invoke-DCATRemoteAudit'
-    )
+    'Get-DCATStatus',
+    'Get-DCATPresetConfig',
+    'Get-DCATCompliance',
+    'Get-DCATScore',
+    'Set-DCATHardening'
+)
 
     PrivateData = @{
         PSData = @{

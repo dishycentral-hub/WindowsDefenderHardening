@@ -19,6 +19,49 @@ function Get-DCATStatus {
     $tamper = $null
     try {
         $tamper = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows Defender\Features' -Name 'TamperProtection' -ErrorAction Stop).TamperProtection
+    } catch {
+        # Ignore if not present
+    }
+
+    [PSCustomObject]@{
+        ComputerName              = $env:COMPUTERNAME
+
+        # Core AV
+        RealTimeProtectionEnabled = $mpStatus.RealTimeProtectionEnabled
+        DisableRealtimeMonitoring = $mpPreference.DisableRealtimeMonitoring
+        PUAProtection             = $mpPreference.PUAProtection
+        MAPSReporting             = $mpPreference.MAPSReporting
+        SubmitSamplesConsent      = $mpPreference.SubmitSamplesConsent
+
+        # Cloud / network
+        CloudBlockLevel           = $mpPreference.CloudBlockLevel
+        CloudExtendedTimeout      = $mpPreference.CloudExtendedTimeout
+        EnableNetworkProtection   = $mpPreference.EnableNetworkProtection
+
+        # Other
+        SignatureUpdateInterval   = $mpPreference.SignatureUpdateInterval
+        TamperProtection          = $tamper
+
+        # ASR – simple count for v0.1
+        ASRRuleCount              = $mpPreference.AttackSurfaceReductionRules_Ids.Count
+    }
+}
+
+function Get-DCATStatus {
+    <#
+    .SYNOPSIS
+        Collect key Defender configuration values from the local machine.
+    #>
+    [CmdletBinding()]
+    param()
+
+    $mpStatus     = Get-MpComputerStatus
+    $mpPreference = Get-MpPreference
+
+    # Some settings (like TamperProtection) live in registry
+    $tamper = $null
+    try {
+        $tamper = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows Defender\Features' -Name 'TamperProtection' -ErrorAction Stop).TamperProtection
     } catch { }
 
     [PSCustomObject]@{
@@ -234,6 +277,75 @@ function Set-DCATHardening {
         if (-not $WhatIf) {
             Write-Host "$($config.Name) preset applied." -ForegroundColor Green
         }
+    }
+}
+function Get-DCATCompliance {
+    <#
+    .SYNOPSIS
+        Compare local Defender settings against a DCAT preset and compute a score.
+
+    .PARAMETER Preset
+        Preset name: CISLevel1, CISLevel2, STIG, DoD
+    #>
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [ValidateSet('CISLevel1','CISLevel2','STIG','DoD')]
+        [string]$Preset
+    )
+
+    $status       = Get-DCATStatus
+    $presetConfig = Get-DCATPresetConfig -Name $Preset
+
+    $rules   = $presetConfig.Rules
+    $details = @()
+    $score   = 0
+    $max     = 0
+
+    foreach ($rule in $rules) {
+        $key      = $rule.Key
+        $expected = $rule.Expected
+        $weight   = [int]$rule.Weight
+        $actual   = $status.$key
+
+        $compliant = $false
+        $reason    = $null
+
+        if ($null -eq $actual) {
+            $reason = "Setting not found on this system"
+        }
+        elseif ($actual -eq $expected) {
+            $compliant = $true
+            $reason    = "Matched expected value"
+        }
+        else {
+            $reason = "Expected '$expected' but found '$actual'"
+        }
+
+        if ($weight -lt 0) { $weight = 0 }
+
+        $max += $weight
+        if ($compliant) { $score += $weight }
+
+        $details += [PSCustomObject]@{
+            Setting   = $key
+            Expected  = $expected
+            Actual    = $actual
+            Weight    = $weight
+            Compliant = $compliant
+            Reason    = $reason
+        }
+    }
+
+    $percent = if ($max -eq 0) { 0 } else { [math]::Round(($score / $max) * 100, 0) }
+
+    [PSCustomObject]@{
+        ComputerName = $status.ComputerName
+        Preset       = $Preset
+        DCATScore    = $percent
+        TotalWeight  = $max
+        PassedWeight = $score
+        Details      = $details
     }
 }
 
