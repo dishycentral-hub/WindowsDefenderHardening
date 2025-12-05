@@ -1,0 +1,91 @@
+{
+  "Name": "DCATParanoid",
+  "Description": "Ultra-hardened preset for maximum Defender enforcement (living-off-the-land blocking, zero-exclusion stance, Zero Trust–aligned).",
+  "MpPreferences": {
+    "EnableControlledFolderAccess": 1,
+    "PUAProtection": 1,
+    "RealTimeProtection": true,
+    "SubmitSamplesConsent": 3,
+    "MAPSReporting": 2,
+    "CloudBlockLevel": "High",
+    "CloudExtendedTimeout": 1,
+    "EnableNetworkProtection": 1,
+    "AllowNetworkProtectionOnWinServer": 1,
+    "AllowDatagramProcessingOnWinServer": 1,
+    "ScanAvgCPULoadFactor": 5,
+    "DisableBlockAtFirstSeen": false,
+
+    "EngineUpdatesChannel": 0,
+    "PlatformUpdatesChannel": 0,
+    "SignatureUpdateInterval": 1,
+    "MeteredConnectionUpdates": false,
+
+    "HighThreatDefaultAction": 1,
+    "ModerateThreatDefaultAction": 1,
+    "LowThreatDefaultAction": 1,
+    "SevereThreatDefaultAction": 1,
+
+    "EnableDnsSinkhole": 1,
+    "EnableNetworkProtectionExploitInspection": 1,
+    "EnableNetworkProtectionRealtimeInspection": 1,
+    "EnableNetworkProtectionControlledFolderAccessInspection": 1,
+    "MP_FORCE_USE_SANDBOX": 1,
+    "CheckForSignaturesBeforeRunningScan": 1,
+
+    "DisableBehaviorMonitoring": false,
+    "DisableIOAVProtection": false,
+    "DisableScriptScanning": false,
+    "DisableRemovableDriveScanning": false,
+    "DisableArchiveScanning": false,
+    "DisableEmailScanning": false,
+    "DisableIntrusionPreventionSystem": false,
+    "DisableSshParsing": false,
+    "DisableDnsParsing": false,
+    "DisableDnsOverTcpParsing": false,
+    "EnableFileHashComputation": true,
+
+    "ScanArchiveFilesWithPassword": true,
+    "ScanDownloads": 2,
+    "ScanNetworkFiles": 2,
+    "ScanIncomingMail": 2,
+    "ScanMappedNetworkDrivesDuringFullScan": true,
+    "ScanRemovableDrivesDuringFullScan": true,
+    "ScanScriptsLoadedInInternetExplorer": true,
+    "ScanScriptsLoadedInOfficeApplications": true,
+    "ScanSubDirectoriesDuringQuickScan": true,
+    "ScanRemovableDrivesDuringQuickScan": true,
+    "ScanMappedNetworkDrivesDuringQuickScan": true,
+    "SignatureDisableUpdateOnStartupWithoutEngine": false,
+
+    "AttackSurfaceReductionOnlyExclusions": [],
+    "ControlledFolderAccess_Exclusions": [],
+
+    "AttackSurfaceReductionRules_Ids": [
+      "BE9BA2D9-53EA-4CDC-84E5-9B1EEEE46550",
+      "D4F940AB-401B-4EFC-AADC-AD5F3C50688A",
+      "3B576869-A4EC-4529-8536-B80A7769E899",
+      "75668C1F-73B5-4CF0-BB93-3ECF5CB7CC84",
+      "D3E037E1-3EB8-44C8-A917-57927947596D",
+      "5BEB7EFE-FD9A-4556-801D-275E5FFC04CC",
+      "92E97FA1-2EDF-4476-BDD0B4DDDC7B",
+      "01443614-CD74-433A-B99E-2ECDC07BFC25",
+      "9E6C4E1F-7D60-472F-BA1A-A39EF669E4B2",
+      "E6DB77E5-3DF2-4CF1-B95A-636979351E5B",
+      "D1E49AAC-8F56-4280-B9BA-993A6D77406C",
+      "B2B3F03D-6A65-4F7B-A9C7-1C7EF74A9BA4",
+      "26190899-1602-49E8-8B27-EB1D0A1CE869",
+      "7674BA52-37EB-4A4F-A9A1-F0F9A1619A2C",
+      "56A863A9-875E-4185-98A7-B882C64B5CE5",
+      "C1DB55AB-C21A-4637-BB3F-A12568109D35"
+    ],
+    "AttackSurfaceReductionRules_Actions": [
+      1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1
+    ]
+  },
+  "Registry": {
+    "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ExploitGuard\\ASR": {
+      "ExploitGuard_ASR_Rules": 1
+    }
+  }
+}

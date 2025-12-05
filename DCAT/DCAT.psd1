@@ -1,26 +1,23 @@
 @{
-    RootModule        = 'DCAT.psm1'
-    ModuleVersion     = '1.0.0'
-    GUID              = 'f10c7737-56d4-48c6-a300-eb2555183331'
-    Author            = 'Your Name'
-    CompanyName       = 'Independent'
-    Copyright         = '(c) 2025 Your Name'
-    Description       = 'Defender Control and Audit Toolkit'
-    PowerShellVersion = '5.1'
+    RootModule         = 'DCAT.psm1'
+    ModuleVersion      = '1.3.1'
+    GUID               = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+    Author             = 'Your Name'
+    CompanyName        = 'Independent'
+    Copyright          = '(c) 2025 Your Name. All rights reserved.'
+    Description        = 'DCAT – Defender Control & Audit Toolkit | Rule-by-rule compliance, hardening, scoring'
 
-    FunctionsToExport = @(
-    'Get-DCATStatus',
-    'Get-DCATPresetConfig',
-    'Get-DCATCompliance',
-    'Get-DCATScore',
-    'Set-DCATHardening'
-)
+    PowerShellVersion  = '5.1'
+    CompatiblePSEditions = 'Desktop','Core'
 
-    PrivateData = @{
+    # Export EVERY function – never miss one again
+    FunctionsToExport  = '*'
+
+    PrivateData        = @{
         PSData = @{
-            LicenseUri = 'https://opensource.org/licenses/MIT'
-            ProjectUri = 'https://github.com/YourGithubUser/DCAT'
-            Tags       = @('Defender','Security','Hardening','CIS','Windows')
+            Tags       = 'Defender','Security','Compliance','CIS','Hardening','Audit','PowerShell'
+            LicenseUri = 'https://github.com/YourName/DCAT/blob/main/LICENSE'
+            ProjectUri = 'https://github.com/YourName/DCAT'
         }
     }
 }

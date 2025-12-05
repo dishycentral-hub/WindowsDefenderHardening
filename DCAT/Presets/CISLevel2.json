@@ -1,20 +1,31 @@
 {
-  "Name": "CISLevel2",
-  "Description": "DCAT CIS Level 2-style Defender baseline (v0.1)",
-  "Rules": [
-    { "Key": "RealTimeProtectionEnabled", "Expected": true,  "Weight": 20 },
-    { "Key": "DisableRealtimeMonitoring", "Expected": false, "Weight": 10 },
-    { "Key": "PUAProtection",             "Expected": 1,     "Weight": 10 },
-    { "Key": "MAPSReporting",             "Expected": 2,     "Weight": 10 },
-    { "Key": "SubmitSamplesConsent",      "Expected": 1,     "Weight": 10 },
-    { "Key": "CloudBlockLevel",           "Expected": 4,     "Weight": 20 },
-    { "Key": "EnableNetworkProtection",   "Expected": 1,     "Weight": 20 }
-  ],
+  "Name": "CISLevel2_Optimized",
+  "Description": "CIS Windows 11/10 Enterprise Level 2 - Optimized",
   "MpPreferences": {
+    "RealTimeProtection": true,
+    "AllowBehaviorMonitoring": 1,
+    "DisableLocalAdminSettingsMerge": 1,
     "PUAProtection": 1,
     "MAPSReporting": 2,
     "SubmitSamplesConsent": 1,
-    "CloudBlockLevel": 4,
-    "EnableNetworkProtection": 1
+    "CloudBlockLevel": "High",
+    "CloudExtendedTimeout": 50,
+    "EnableNetworkProtection": 1,
+    "EnableControlledFolderAccess": 1,
+    "AttackSurfaceReductionRules_Ids": [
+      "BE9BA2D9-53EA-4CDC-84E5-9B1EEEE46550",
+      "D4F940AB-401B-4EFC-AADC-AD5F3C50688A",
+      "3B576869-A4EC-4529-8536-B80A7769E899",
+      "75668C1F-73B5-4CF0-BB93-3ECF5CB7CC84",
+      "D3E037E1-3EB8-44C8-A917-57927947596D",
+      "5BEB7EFE-FD9A-4556-801D-275E5FFC04CC",
+      "92E97FA1-2EDF-4476-BDD6-9DD0B4DDDC7B",
+      "c1db55ab-c21a-4637-bb3f-a12568109d35",
+      "9e6c4e1f-7d60-472f-ba1a-a39ef669e4b2",
+      "b2b3f03d-6a65-4f7b-a9c7-1c7ef74a9ba4",
+      "26190899-1602-49e8-8b27-e78e9ab873b2",
+      "7674ba52-37eb-4a4f-a9a1-f0f9a1619a2c"
+    ],
+    "AttackSurfaceReductionRules_Actions": [1,1,1,1,1,1,1,1,1,1,1,1]
   }
 }
