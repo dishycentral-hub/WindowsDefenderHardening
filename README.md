@@ -66,7 +66,7 @@
 
 ```powershell
 # 1. Clone the repository
-git clone https://github.com/yourname/DCAT.git
+git clone [https://github.com/yourname/DCAT.git](https://github.com/dishycentral-hub/WindowsDefenderHardening.git)
 cd DCAT
 
 # 2. Import the module
